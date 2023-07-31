@@ -1,0 +1,240 @@
+{% extends 'base.html' %} {% block body %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/style.css') }}"
+/>
+<div
+  id="carouselExampleAutoplaying"
+  class="carousel slide"
+  data-bs-ride="carousel"
+>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img
+        src="{{ url_for('static', filename='image/image1.png') }}"
+        class="d-block w-100"
+        alt="..."
+      />
+    </div>
+    <div class="carousel-item">
+      <img
+        src="{{ url_for('static', filename='image/image2.png') }}"
+        class="d-block w-100"
+        alt="..."
+      />
+    </div>
+    <div class="carousel-item">
+      <img
+        src="{{ url_for('static', filename='image/image1.png') }}"
+        class="d-block w-100"
+        alt="..."
+      />
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleAutoplaying"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleAutoplaying"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- category ==============================================-->
+
+<!-- ============================LOgin Starts here  ================================================================================================ -->
+<form action="/login" method="POST">
+  <div class="modal" tabindex="-1" id="loginModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Login</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="userId" class="form-label">User ID</label>
+              <input
+                type="text"
+                class="form-control"
+                id="userId"
+                placeholder="Enter your User ID"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Enter your password"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <br />
+            <p class="left lofi" id="login">Register</p>
+            <p class="right lofi" id="adminlogin">Admin Login</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- ============================================================LOgin ends here======================================================================== -->
+<!-- ============================Register Starts here  ================================================================================================ -->
+<!-- Modal for Register -->
+<div class="modal" tabindex="-1" id="registerModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Register</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="/register" method="POST">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter Name"
+              class="form-control"
+              id="name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              class="form-control"
+              id="email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              class="form-control"
+              id="password"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input
+              type="text"
+              name="city"
+              placeholder="Enter City"
+              class="form-control"
+              id="city"
+            />
+          </div>
+          <div>&nbsp;</div>
+
+          <input type="submit" value="Register" class="btn btn-primary" />
+          <br />
+          <p class="left lofi" id="login">Login</p>
+          <p class="right lofi" id="adminlogin">Admin Login</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Modal for Register -->
+
+<!-- ============================================================Register ends here======================================================================== -->
+<hr />
+<h1 class="heading">category</h1>
+<div class="container">
+  <div class="container">
+    <div class="card" style="width: 18rem">
+      <img
+        src="{{ url_for('static', filename='/image/testimage.png') }}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <p class="card-text">
+          Some quick example text to build you know what i mean that was really
+          great
+        </p>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="btn btn-primary">Add to cart</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card" style="width: 18rem">
+      <img
+        src="{{ url_for('static', filename='/image/testimage.png') }}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <p class="card-text">
+          Some quick example text to build you know what i mean that was really
+          great
+        </p>
+      </div>
+      <div class="card-footer" style="display: none">
+        <a href="#" class="btn btn-primary">Add to cart</a>
+      </div>
+    </div>
+  </div>
+  <link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <div class="container">
+    <div class="card" style="width: 18rem">
+      <img
+        src="https://www.w3schools.com/howto/img_avatar.png"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <p class="card-text">
+          Some quick example text to build you know what i mean that was really
+          great
+        </p>
+      </div>
+      <div class="card-footer" style="display: none">
+        <a href="#" class="btn btn-primary">Add to cart</a>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  {% endblock body %}
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</div>

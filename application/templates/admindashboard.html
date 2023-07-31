@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block profile %}
+<li class="nav-item">
+  <a class="nav-link" href="/logout">Logout</a>
+</li>
+{% endblock profile %} {% block body %}
+<a href="/addcategory" class="btn btn-primary btn-sm catBtn"
+  ><i class="bi bi-plus"></i>Add Category</a
+>
+<div class="container">
+  {% if categories|length==0 %}
+  <p>No categories or products created.</p>
+  {% else %} {% for category in categories %}
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title">{{category.name}}</h5>
+      <p class="card-text">No products created</p>
+      <a href="/addproduct/{{category.id}}" class="btn btn-primary">+</a>
+      <a href="/editcategory/{{category.id}}" class="btn btn-primary">Edit</a>
+      <a href="/deletecategory/{{category.id}}" class="btn btn-primary"
+        >delete</a
+      >
+      <a href="/viewproduct/{{category.id}}" class="btn btn-primary">View</a>
+    </div>
+  </div>
+  {% endfor %} {% endif %}
+</div>
+
+{% endblock body %}

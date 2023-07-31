@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block body %}
+
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <td>S.No.</td>
+        <td>name</td>
+        <td>price</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{products.index(product)+1}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
