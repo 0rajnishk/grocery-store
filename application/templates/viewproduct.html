@@ -1,4 +1,10 @@
-{% extends 'base.html' %} {% block body %}
+{% extends 'base.html' %} 
+{% block profile %}
+<li class="nav-item">
+  <a class="nav-link" href="/logout">Logout</a>
+</li>
+{% endblock profile %}
+{% block body %}
 
 <div class="container">
   <table>
@@ -7,6 +13,7 @@
         <td>S.No.</td>
         <td>name</td>
         <td>price</td>
+        <td>Action</td>
       </tr>
     </thead>
     <tbody>
@@ -14,7 +21,11 @@
       <tr>
         <td>{{products.index(product)+1}}</td>
         <td>{{product.name}}</td>
-        <td>{{product.price}}</td>
+        <td>{{product.rateperunit}}</td>
+        <td>
+          <a href="/editproduct/{{product.id}}" class="btn btn-sm btn-primary">Update</a>
+          <a href="/deleteproduct/{{product.id}}" class="btn btn-sm btn-danger">Deleted</a>
+        </td>
       </tr>
       {% endfor %}
     </tbody>

@@ -1,3 +1,4 @@
+import datetime
 from application.database import db
 
 class User(db.Model):
@@ -19,6 +20,7 @@ class User(db.Model):
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), unique=True)
+    quantity = db.Column(db.Integer,default=0)
     products = db.relationship('Product', backref='category', lazy='dynamic')
 
 
@@ -27,6 +29,7 @@ class Category(db.Model):
 
 class Product(db.Model):
     id=db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.BLOB)
     name=db.Column(db.String(128), unique=True)
     manufacture=db.Column(db.String(128))
     expirydate=db.Column(db.String(128))
@@ -35,6 +38,7 @@ class Product(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     totalprice=db.Column(db.Integer,default=0)
     unit=db.Column(db.Integer,default=0)
+
 
     def __init__(self, name, manufacture, expirydate, rateperunit, quantity, category_id,unit):
         self.name = name
@@ -46,9 +50,24 @@ class Product(db.Model):
         self.unit=unit
 
 
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    product_id=db.Column(db.Integer, db.ForeignKey('product.id'))
+    quantity=db.Column(db.Integer)
+    totalprice=db.Column(db.Integer)
 
+    def __init__(self, user_id, product_id, quantity):
+        self.user_id = user_id
+        self.product_id = product_id
+        self.quantity = quantity
 
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'))
+    date = db.Column(db.Date)
 
-
-
-
+    def __init__(self, user_id, cart_id):
+        self.user_id = user_id
+        self.cart_id = cart_id

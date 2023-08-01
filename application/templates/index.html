@@ -1,91 +1,62 @@
-{% extends 'base.html' %} {% block body %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/style.css') }}"
-/>
-<div
-  id="carouselExampleAutoplaying"
-  class="carousel slide"
-  data-bs-ride="carousel"
->
+{% extends 'base.html' %}
+{% block profile %}
+
+{% if user %}
+<p class="h5">Welcome {{user}}!</p>
+<h6><a href="/viewcart">My cart</a></h6>
+<p></p><a href="/logout">Logout</a></p>
+{% else %}
+
+<p id="login" class="lofi">Login</p>
+<p id="register" class="lofi">Register</p>
+{% endif %}
+
+{% endblock profile %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img
-        src="{{ url_for('static', filename='image/image1.png') }}"
-        class="d-block w-100"
-        alt="..."
-      />
+      <img src="{{ url_for('static', filename='image/image1.png') }}" class="d-block w-100" alt="..." />
     </div>
     <div class="carousel-item">
-      <img
-        src="{{ url_for('static', filename='image/image2.png') }}"
-        class="d-block w-100"
-        alt="..."
-      />
+      <img src="{{ url_for('static', filename='image/image2.png') }}" class="d-block w-100" alt="..." />
     </div>
     <div class="carousel-item">
-      <img
-        src="{{ url_for('static', filename='image/image1.png') }}"
-        class="d-block w-100"
-        alt="..."
-      />
+      <img src="{{ url_for('static', filename='image/image1.png') }}" class="d-block w-100" alt="..." />
     </div>
   </div>
-  <button
-    class="carousel-control-prev"
-    type="button"
-    data-bs-target="#carouselExampleAutoplaying"
-    data-bs-slide="prev"
-  >
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button
-    class="carousel-control-next"
-    type="button"
-    data-bs-target="#carouselExampleAutoplaying"
-    data-bs-slide="next"
-  >
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
 
-<!-- category ==============================================-->
-
-<!-- ============================LOgin Starts here  ================================================================================================ -->
-<form action="/login" method="POST">
+<form action="{{ url_for('login') }}" method="POST">
   <div class="modal" tabindex="-1" id="loginModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Login</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          {% raw %}
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          {% endraw %}
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form>
             <div class="mb-3">
-              <label for="userId" class="form-label">User ID</label>
-              <input
-                type="text"
-                class="form-control"
-                id="userId"
-                placeholder="Enter your User ID"
-              />
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                placeholder="Enter your password"
-              />
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <br />
@@ -97,65 +68,32 @@
     </div>
   </div>
 </form>
-<!-- ============================================================LOgin ends here======================================================================== -->
-<!-- ============================Register Starts here  ================================================================================================ -->
-<!-- Modal for Register -->
+
 <div class="modal" tabindex="-1" id="registerModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Register</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form action="/register" method="POST">
           <div class="form-group">
             <label for="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter Name"
-              class="form-control"
-              id="name"
-              required
-            />
+            <input type="text" name="name" placeholder="Enter Name" class="form-control" id="name" required />
           </div>
           <div class="form-group">
             <label for="email">Email address</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter email"
-              class="form-control"
-              id="email"
-              required
-            />
+            <input type="email" name="email" placeholder="Enter email" class="form-control" id="email" required />
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter password"
-              class="form-control"
-              id="password"
-              required
-            />
+            <input type="password" name="password" placeholder="Enter password" class="form-control" id="password"
+              required />
           </div>
           <div class="form-group">
             <label for="city">City</label>
-            <input
-              type="text"
-              name="city"
-              placeholder="Enter City"
-              class="form-control"
-              id="city"
-            />
+            <input type="text" name="city" placeholder="Enter City" class="form-control" id="city" />
           </div>
           <div>&nbsp;</div>
 
@@ -168,73 +106,38 @@
     </div>
   </div>
 </div>
-<!-- End of Modal for Register -->
 
-<!-- ============================================================Register ends here======================================================================== -->
 <hr />
 <h1 class="heading">category</h1>
 <div class="container">
-  <div class="container">
-    <div class="card" style="width: 18rem">
-      <img
-        src="{{ url_for('static', filename='/image/testimage.png') }}"
-        class="card-img-top"
-        alt="..."
-      />
-      <div class="card-body">
-        <p class="card-text">
-          Some quick example text to build you know what i mean that was really
-          great
-        </p>
-      </div>
-      <div class="card-footer">
-        <a href="#" class="btn btn-primary">Add to cart</a>
+  {% for category in categories %}
+  <div class="row">
+    <div class="col">
+      <h3 class="text-secondary"> {{category.name}} </h3>
+      <div class="horizontal-scroll-container">
+        {% for product in products %}
+        {% if product.category_id==category.id %}
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="..." alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"> {{product.name}} </h5>
+            <p class="card-text"> {{product.rateperunit}} per {{product.unit}} </p>
+            </p>
+            <!-- <a href="/addtocart/{{product.id}}" class="btn btn-primary btn-sm">Add to Cart</a> -->
+            <form action="/addtocart/{{product.id}}" method="POST">
+              <label for="quantity">:</label>
+              <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{product.quantity}}" required>
+              <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
       </div>
     </div>
   </div>
 
-  <div class="container">
-    <div class="card" style="width: 18rem">
-      <img
-        src="{{ url_for('static', filename='/image/testimage.png') }}"
-        class="card-img-top"
-        alt="..."
-      />
-      <div class="card-body">
-        <p class="card-text">
-          Some quick example text to build you know what i mean that was really
-          great
-        </p>
-      </div>
-      <div class="card-footer" style="display: none">
-        <a href="#" class="btn btn-primary">Add to cart</a>
-      </div>
-    </div>
-  </div>
-  <link
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <div class="container">
-    <div class="card" style="width: 18rem">
-      <img
-        src="https://www.w3schools.com/howto/img_avatar.png"
-        class="card-img-top"
-        alt="..."
-      />
-      <div class="card-body">
-        <p class="card-text">
-          Some quick example text to build you know what i mean that was really
-          great
-        </p>
-      </div>
-      <div class="card-footer" style="display: none">
-        <a href="#" class="btn btn-primary">Add to cart</a>
-      </div>
-    </div>
-  </div>
-  <br />
-  <br />
+  {% endfor %}
   {% endblock body %}
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </div>

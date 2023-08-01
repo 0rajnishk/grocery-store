@@ -1,11 +1,7 @@
 {% extends 'base.html' %} {% block profile %}
-<li class="nav-item">
-  <a class="nav-link" href="/logout">Logout</a>
-</li>
+<a class="nav-link" href="/logout">Logout</a>
 {% endblock profile %} {% block body %}
-<a href="/addcategory" class="btn btn-primary btn-sm catBtn"
-  ><i class="bi bi-plus"></i>Add Category</a
->
+<a href="/addcategory" class="btn btn-primary btn-sm catBtn"><i class="bi bi-plus"></i>Add Category</a>
 <div class="container">
   {% if categories|length==0 %}
   <p>No categories or products created.</p>
@@ -13,12 +9,14 @@
   <div class="card" style="width: 18rem">
     <div class="card-body">
       <h5 class="card-title">{{category.name}}</h5>
+      {% if category.quantity==0 %}
       <p class="card-text">No products created</p>
+      {% else %}
+      <p class="card-text">Total Products: {{category.quantity}}</p>
+      {% endif %}
       <a href="/addproduct/{{category.id}}" class="btn btn-primary">+</a>
       <a href="/editcategory/{{category.id}}" class="btn btn-primary">Edit</a>
-      <a href="/deletecategory/{{category.id}}" class="btn btn-primary"
-        >delete</a
-      >
+      <a href="/deletecategory/{{category.id}}" class="btn btn-primary">delete</a>
       <a href="/viewproduct/{{category.id}}" class="btn btn-primary">View</a>
     </div>
   </div>

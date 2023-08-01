@@ -4,20 +4,15 @@
       /* overflow: hidden; */
   }
 
-  .container {
+  .horizontal-scroll-container {
       padding: 20px;
       border: 1px dotted;
       white-space: nowrap;
       overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      /* For smooth scrolling on iOS devices */
-      scrollbar-width: none;
-      /* For Firefox */
       -ms-overflow-style: none;
-      /* For Internet Explorer and Edge */
   }
 
-  .container::-webkit-scrollbar {
+  .horizontal-scroll-container::-webkit-scrollbar {
       display: none;
       /* Hide the scrollbar for Chrome, Safari, and Opera */
   }
@@ -27,25 +22,14 @@
       text-align: center;
       /* position: fixed; */
   }
-  .card {
-    display: inline-block;
-  }
 
-  .card-img-top {
+  .card {
+      display: inline-block;
       width: 286px;
       height: 180px;
-      display: inline-block;
   }
 
-  .card-body {
-      max-width: 286px;
-  }
 
-  .card-text {
-      width: 250px !important;
-      overflow: hidden;
-      word-wrap: break-word !important;
-  }
 
   .left {
       float: left;
@@ -73,6 +57,18 @@
       display: block;
   }
 
- .card:hover .card-footer {
+  .card:hover .card-footer {
       display: block;
+  }
+
+  .horizontal-scroll-container {
+      overflow-x: auto;
+      white-space: nowrap;
+  }
+
+  /* Optionally, you can add some styling to the cards within the container */
+  .horizontal-scroll-container .card {
+      display: inline-block;
+      width: 200px;
+      margin-right: 10px;
   }

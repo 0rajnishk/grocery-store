@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block profile %}
+<li class="nav-item">
+    <a class="nav-link" href="/logout">Logout</a>
+</li>
+{% endblock profile %}
+
+{% block body %}
+<form action="/addtocart/{{product.id}}" method="POST">
+    <label for="quantity">Enter quantity: </label>
+    <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{product.quantity}}" required>
+    <button type="submit">Add to Cart</button>
+</form>
+{% endblock body %}
