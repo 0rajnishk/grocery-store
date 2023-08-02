@@ -1,3 +1,4 @@
+import base64
 from flask import g, render_template, request, redirect, url_for, session, flash
 from application import app
 from application.models import Cart, Product, User, Category
@@ -5,6 +6,8 @@ from application.database import db
 
 app.secret_key = 'development key'
 
+def convert_to_base64(image_data):
+    return base64.b64encode(image_data).decode('utf-8')
 
 @app.before_request
 def load_user():
@@ -25,11 +28,14 @@ def addadmin():
 def index():
     caegories = Category.query.all()
     products = Product.query.all()
+    for product in products:
+        product.image = base64.b64encode(product.image).decode('utf-8')
     if g.user:
         if g.user.role == 'admin':
             return redirect(url_for('adminDashboard'))
         else:
             products = Product.query.all()
+            
             return render_template('index.html', products=products, user=session['name'], categories=caegories)  
     return render_template('index.html', products=products, categories=caegories)
 
@@ -95,7 +101,7 @@ def adminDashboard():
         if g.user.role == 'admin':
             return render_template('adminDashboard.html', categories=viewcategory())
         else:
-            return redirect(url_for('userDashboard'))
+            return redirect(url_for('logout'))
     return redirect(url_for('adminlogin'))
 
 
@@ -148,7 +154,7 @@ def addproduct(id):
         category = Category.query.get(id)
         if request.method == 'POST':
             name = request.form['name']
-            image = request.form['image'].read()
+            image = request.files['image'].read()
             manufacture = request.form['mnf-date']
             expirydate = request.form['exp-date']
             rateperunit = request.form['price']

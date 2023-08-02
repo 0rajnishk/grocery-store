@@ -7,33 +7,30 @@
 <!-- Login form -->
 
 <div class="container">
+    <div class="form-box">
 
-    <form action="/adminlogin" method="POST">
+        <form action="/adminlogin" method="POST">
 
-    <div class="form-group">
+            <div class="form-group">
 
-        <label for="email">Email address</label>
+                <label for="email">Email address</label>
 
-        <input type="email" name="email" placeholder="Enter email" class="form-control" id="email">
+                <input type="email" name="email" placeholder="Enter email" class="form-control" id="email">
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="password">Password</label>
+
+                <input type="password" name="password" placeholder="Enter password" class="form-control" id="password">
+
+            </div>
+
+            <input type="submit" value="Login" class="btn btn-primary">
+
+        </form>
 
     </div>
-
-    <div class="form-group">
-
-        <label for="password">Password</label>
-
-        <input type="password" name="password" placeholder="Enter password" class="form-control" id="password">
-
-    </div>
-
-    <input type="submit" value="Login" class="btn btn-primary">
-
-</form>
-
 </div>
-
 {% endblock body %}
-
-
-
-
